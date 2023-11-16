@@ -5,13 +5,22 @@ using UnityEngine;
 public class Line : MonoBehaviour
 {
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private EdgeCollider2D edgeCollider;
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TransformToLocalSpcae();
-        }
+    private readonly List<Vector2> points = new List<Vector2>();
+
+    private void Start() {
+        edgeCollider.transform.position -= transform.position;
+        lineRenderer.sortingLayerName = "Line";
+        lineRenderer.sortingOrder = 1;
     }
+
+    // private void Update() {
+    //     if (Input.GetKeyDown(KeyCode.E))
+    //     {
+    //         TransformToLocalSpcae();
+    //     }
+    // }
 
     public void SetPosition(Vector2 pos)
     {
@@ -20,8 +29,12 @@ public class Line : MonoBehaviour
             return;
         }
 
+        points.Add(pos);
+
         lineRenderer.positionCount++;
         lineRenderer.SetPosition(lineRenderer.positionCount - 1, pos);
+
+        edgeCollider.points = points.ToArray();
     }
 
     private bool CanAppend(Vector2 pos)
@@ -34,7 +47,7 @@ public class Line : MonoBehaviour
         return Vector2.Distance(lineRenderer.GetPosition(lineRenderer.positionCount - 1), pos) > DrawManager.RESOLUTION;
     }
 
-    private void TransformToLocalSpcae()
+    public void TransformToLocalSpcae()
     {
         Vector3[] linePoints = new Vector3[lineRenderer.positionCount];
 		lineRenderer.GetPositions(linePoints);
