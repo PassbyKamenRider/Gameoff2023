@@ -8,6 +8,7 @@ public class DrawManager : MonoBehaviour
     public const float RESOLUTION = 0.1f;
     public static int chosenTool = 0;
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject sword;
     private Camera cam;
     [SerializeField] private Line[] linePrefabs;
     private int chosenLine = 0;
@@ -29,7 +30,14 @@ public class DrawManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 currentLine = Instantiate(linePrefabs[chosenLine], mousePos, Quaternion.identity);
-                currentLine.gameObject.transform.SetParent(player.transform);
+                if (hit.collider.name == "Character_Frame")
+                {
+                    currentLine.gameObject.transform.SetParent(player.transform);
+                }
+                else
+                {
+                    currentLine.gameObject.transform.SetParent(sword.transform);
+                }
             }
 
             if (Input.GetMouseButton(0))
@@ -71,14 +79,13 @@ public class DrawManager : MonoBehaviour
         }
     }
 
-    public void TestPlayerWalk(Rigidbody2D playerRb)
+    public void ToLocalSpace()
     {
         Line[] lines = FindObjectsOfType<Line>();
         foreach (Line line in lines)
         {
             line.TransformToLocalSpcae();
         }
-        playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     public void SwitchLine(int lineType)

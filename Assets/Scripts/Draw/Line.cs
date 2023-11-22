@@ -6,6 +6,7 @@ public class Line : MonoBehaviour
 {
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private EdgeCollider2D edgeCollider;
+    private bool isLocal;
 
     private readonly List<Vector2> points = new List<Vector2>();
 
@@ -14,13 +15,6 @@ public class Line : MonoBehaviour
         lineRenderer.sortingLayerName = "Line";
         lineRenderer.sortingOrder = 1;
     }
-
-    // private void Update() {
-    //     if (Input.GetKeyDown(KeyCode.E))
-    //     {
-    //         TransformToLocalSpcae();
-    //     }
-    // }
 
     public void SetPosition(Vector2 pos)
     {
@@ -49,13 +43,28 @@ public class Line : MonoBehaviour
 
     public void TransformToLocalSpcae()
     {
+        if (!isLocal)
+        {
+            Vector3[] linePoints = new Vector3[lineRenderer.positionCount];
+            lineRenderer.GetPositions(linePoints);
+            for (int i = 0; i < linePoints.Length; i++)
+            {
+                linePoints[i] = lineRenderer.transform.InverseTransformPoint(linePoints[i]);
+            }
+            lineRenderer.SetPositions(linePoints);
+            lineRenderer.useWorldSpace = false;
+            isLocal = true;
+        }
+    }
+
+    public void Scale(float scale)
+    {
         Vector3[] linePoints = new Vector3[lineRenderer.positionCount];
-		lineRenderer.GetPositions(linePoints);
+        lineRenderer.GetPositions(linePoints);
         for (int i = 0; i < linePoints.Length; i++)
         {
-            linePoints[i] = lineRenderer.transform.InverseTransformPoint(linePoints[i]);
+            linePoints[i] = scale * linePoints[i];
         }
         lineRenderer.SetPositions(linePoints);
-        lineRenderer.useWorldSpace = false;
     }
 }
