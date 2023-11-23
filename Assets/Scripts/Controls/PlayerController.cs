@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        // Extra jump control, unused
         // if (Input.GetButtonUp("Jump") && playerRb.velocity.y > 0)
         // {
         //     playerRb.velocity = new Vector2(playerRb.velocity.x, 0);
@@ -78,11 +79,11 @@ public class PlayerController : MonoBehaviour
     {
         if (xAxis < 0)
         {
-            linesParent.localScale = new Vector2(-1, transform.localScale.y);
+            linesParent.localScale = new Vector2(-Mathf.Abs(linesParent.transform.localScale.x), linesParent.transform.localScale.y);
         }
         else if (xAxis > 0)
         {
-            linesParent.localScale = new Vector2(1, transform.localScale.y);
+            linesParent.localScale = new Vector2(Mathf.Abs(linesParent.transform.localScale.x), linesParent.transform.localScale.y);
         }
     }
 

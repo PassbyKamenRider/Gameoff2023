@@ -609,6 +609,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160605284}
   m_CullTransparentMesh: 1
+--- !u!1 &234884161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 234884162}
+  m_Layer: 0
+  m_Name: Sword Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &234884162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234884161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.5, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1224352656}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &242783300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,6 +1275,7 @@ MonoBehaviour:
   swordFrame: {fileID: 421189988}
   characterFrame: {fileID: 1637630138}
   drawManager: {fileID: 332979805}
+  playerBg: {fileID: 0}
 --- !u!114 &332979808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4579,7 +4611,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 999
   m_Sprite: {fileID: 21300000, guid: d021d3cac837827438b5b2ce5f5f11f8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4606,7 +4638,7 @@ GameObject:
   - component: {fileID: 1224352659}
   m_Layer: 0
   m_Name: PlayerObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4625,6 +4657,7 @@ Transform:
   m_Children:
   - {fileID: 511407343}
   - {fileID: 1698950088}
+  - {fileID: 234884162}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4656,7 +4689,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224352655}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60f5f3e7e1c906942b0faa9f551a6329, type: 3}
   m_Name: 
@@ -4665,7 +4698,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 1224352657}
   linesParent: {fileID: 511407343}
   walkSpeed: 5
-  jumpForce: 10
+  jumpForce: 5
   groundCheckPoint: {fileID: 1698950088}
   groundCheckY: 0.2
   groundCheckX: 0.5
@@ -4689,7 +4722,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 6c64076cdcd1a6f489ac210eb6ea75ab, type: 2}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -4707,7 +4740,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -5.4, y: 2}
-  m_Size: {x: 2.248981, y: 3.789689}
+  m_Size: {x: 2, y: 3.5}
   m_Direction: 0
 --- !u!1 &1267890196
 GameObject:

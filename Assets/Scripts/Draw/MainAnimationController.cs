@@ -10,6 +10,7 @@ public class MainAnimationController : MonoBehaviour
     [SerializeField] private GameObject swordFrame;
     [SerializeField] private GameObject characterFrame;
     [SerializeField] private DrawManager drawManager;
+    [SerializeField] private Transform playerBg;
 
     public void MoveToCharacter()
     {
