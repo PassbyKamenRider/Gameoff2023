@@ -10,6 +10,7 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private GameObject questItemParent;
     [SerializeField] private List<GameObject> questItemPrefabs;
     [SerializeField] private GameObject[] collectables;
+    [SerializeField] private Dialogue crowDialogue;
     private int currentQuestItem;
     private ProgressManager progressManager;
     private void Start() {
@@ -23,13 +24,17 @@ public class ItemManager : MonoBehaviour
         obj.transform.SetParent(questItemParent.transform);
         obj.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
         obj.transform.localPosition = questItemPositions[currentQuestItem];
-        hasQuestItems[currentQuestItem] = true;
+        hasQuestItems[itemId] = true;
         currentQuestItem += 1;
 
         switch(itemId)
         {
             case 0:
             progressManager.GetPills();
+            break;
+
+            case 2:
+            crowDialogue.AddProgress();
             break;
 
             default:

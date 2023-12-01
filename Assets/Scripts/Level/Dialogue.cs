@@ -6,7 +6,7 @@ public class Dialogue : MonoBehaviour
 {
     [SerializeField] private List<GameObject> textPrinter;
     [SerializeField] private GameObject hint;
-    private int dialogueProgress;
+    public int dialogueProgress;
     private bool isTriggered;
 
     private void Update() {

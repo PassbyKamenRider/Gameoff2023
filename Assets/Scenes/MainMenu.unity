@@ -1435,7 +1435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 511407342}
-  sword: {fileID: 881463634}
+  sword: {fileID: 278622245}
   linePrefab: {fileID: 4435585427142689767, guid: e24eb93b28aeacb46a7d58d3ea95f127, type: 3}
   frameMask:
     serializedVersion: 2
@@ -1502,7 +1502,7 @@ MonoBehaviour:
   - {fileID: 1554235179}
   - {fileID: 316412742}
   resolutionDisplay: {fileID: 1840769247}
-  character: {fileID: 179815559}
+  character: {fileID: 0}
   emptyVolume: {fileID: 2800000, guid: 12c4f49df45910543b521ee8f9d6fbb6, type: 3}
   fullVolume: {fileID: 2800000, guid: 8a3c79ac5b7efc347a0d9217433fec04, type: 3}
   resolutions:

@@ -15,13 +15,14 @@ public class ProgressManager : MonoBehaviour
         playerController.enabled = true;
         player = playerController.gameObject;
         player.SetActive(true);
-        player.transform.position = new Vector3(0, 20, 0);
+        player.transform.position = new Vector3(0, 10, 0);
         foreach (CinemachineVirtualCamera vm in vms)
         {
             vm.Follow = player.transform;
         }
         // Scale player
         player.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        player.GetComponent<Animator>().enabled = false;
 
         // Move Sword
         GameObject sword = GameObject.FindGameObjectWithTag("Sword");

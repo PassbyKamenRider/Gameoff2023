@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         GetInputs();
         Move();
-        PlayAudioWalk();
+        //PlayAudioWalk();
         Jump();
         Flip();
         Attack();
