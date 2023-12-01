@@ -79,4 +79,10 @@ public class ProgressManager : MonoBehaviour
         player.GetComponent<Animator>().Play("Idle");
         playerController.enabled = !playerController.enabled;
     }
+
+    [SerializeField] private GameObject collectionMenu;
+    public void SwtichCollection()
+    {
+        collectionMenu.SetActive(!collectionMenu.activeSelf);
+    }
 }

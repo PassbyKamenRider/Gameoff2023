@@ -61,4 +61,9 @@ public class MainAnimationController : MonoBehaviour
         playerAnimator.Play("Menu_To_Open");
         canvasAnimator.Play("Book_Open");
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }

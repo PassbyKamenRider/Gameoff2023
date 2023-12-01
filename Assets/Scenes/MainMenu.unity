@@ -1435,7 +1435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 511407342}
-  sword: {fileID: 278622245}
+  sword: {fileID: 881463634}
   linePrefab: {fileID: 4435585427142689767, guid: e24eb93b28aeacb46a7d58d3ea95f127, type: 3}
   frameMask:
     serializedVersion: 2
@@ -7233,7 +7233,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1878798483}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 332979807}
+        m_TargetAssemblyTypeName: MainAnimationController, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1905859099
 GameObject:
   m_ObjectHideFlags: 0

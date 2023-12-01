@@ -14,6 +14,8 @@ public class Door : MonoBehaviour
     private ItemManager itemManager;
     private bool isTriggered;
     [SerializeField] private bool isElevator;
+    [SerializeField] private GameObject canvas;
+    [SerializeField] private InGameDrawManager inGameDrawManager;
 
     private void Start() {
         player = FindObjectOfType<PlayerController>(true).gameObject;
@@ -28,6 +30,8 @@ public class Door : MonoBehaviour
                 player.transform.position = targetPosition;
                 if (isElevator)
                 {
+                    canvas.SetActive(false);
+                    inGameDrawManager.enabled = false;
                     player.GetComponent<PlayerController>().enabled = false;
                     player.transform.position = new Vector3(10f, -150.1f, 0f);
                     player.GetComponent<Rigidbody2D>().gravityScale = 0;
