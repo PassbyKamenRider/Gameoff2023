@@ -20,6 +20,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckY = 0.2f;
     [SerializeField] private float groundCheckX = 0.5f;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask lineLayer;
+
+    [Header("Player Attack")]
+    [SerializeField] private Animator swordAnimator;
+    public float attackDelay = 0.2f;
+    private bool attackBlocked;
     private void Awake() {
         if(instance && instance != this)
         {
@@ -37,6 +43,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         Flip();
+        Attack();
     }
 
     private void GetInputs()
@@ -52,9 +59,9 @@ public class PlayerController : MonoBehaviour
 
     public bool IsGrounded()
     {
-        if (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, groundLayer)
-        || Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.down, groundCheckY, groundLayer)
-        || Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, groundLayer))
+        if (Physics2D.Raycast(groundCheckPoint.position, Vector2.down, groundCheckY, groundLayer | lineLayer)
+        || Physics2D.Raycast(groundCheckPoint.position + new Vector3(groundCheckX, 0, 0), Vector2.down, groundCheckY, groundLayer | lineLayer)
+        || Physics2D.Raycast(groundCheckPoint.position + new Vector3(-groundCheckX, 0, 0), Vector2.down, groundCheckY, groundLayer | lineLayer))
         {
             return true;
         }
@@ -87,10 +94,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Attack()
+    {
+        if (attackBlocked)
+        {
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            swordAnimator.SetTrigger("Attack");
+            attackBlocked = true;
+            StartCoroutine(DelayAttack());
+        }
+    }
+
+    private IEnumerator DelayAttack()
+    {
+        yield return new WaitForSeconds(attackDelay);
+        attackBlocked = false;
+    }
+
     public void TogglePlayer()
     {
         playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
         playerRb.gravityScale = 1f;
         gameObject.SetActive(false);
+    }
+
+    public void Stop()
+    {
+        playerRb.velocity = Vector2.zero;
     }
 }

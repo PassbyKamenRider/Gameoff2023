@@ -10,10 +10,10 @@ public class MainAnimationController : MonoBehaviour
     [SerializeField] private GameObject swordFrame;
     [SerializeField] private GameObject characterFrame;
     [SerializeField] private DrawManager drawManager;
-    [SerializeField] private Transform playerBg;
 
     public void MoveToCharacter()
     {
+        drawManager.ToLocalSpace();
         playerAnimator.Play("Menu_To_Edit");
         canvasAnimator.Play("Focus_Book");
         swordAnimator.Play("Sword_To_Char");
@@ -22,6 +22,7 @@ public class MainAnimationController : MonoBehaviour
 
     public void MoveToSword()
     {
+        drawManager.ToLocalSpace();
         swordAnimator.Play("Menu_To_Edit_Sword");
         canvasAnimator.Play("Focus_Sword");
         Invoke("ToggleSwordDraw", 1f);

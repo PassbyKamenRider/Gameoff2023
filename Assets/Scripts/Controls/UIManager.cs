@@ -8,9 +8,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private RawImage[] volumeDisplays;
     [SerializeField] private RawImage resolutionDisplay;
+    [SerializeField] private SpriteRenderer character;
     [SerializeField] Texture2D emptyVolume;
     [SerializeField] Texture2D fullVolume;
     [SerializeField] Texture2D[] resolutions;
+    [SerializeField] Sprite[] defaultCharacters;
     private int resolution = 0;
 
     public void ChangeVolume(int num)
@@ -52,5 +54,10 @@ public class UIManager : MonoBehaviour
     public void ToggleOptions()
     {
         optionsMenu.SetActive(!optionsMenu.activeSelf);
+    }
+
+    public void ChangeCharacter(int idx)
+    {
+        character.sprite = defaultCharacters[idx];
     }
 }

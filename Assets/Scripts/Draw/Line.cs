@@ -13,7 +13,7 @@ public class Line : MonoBehaviour
     private void Start() {
         edgeCollider.transform.position -= transform.position;
         lineRenderer.sortingLayerName = "Line";
-        lineRenderer.sortingOrder = 1000;
+        lineRenderer.sortingOrder = 1001;
     }
 
     public void SetPosition(Vector2 pos)
@@ -57,15 +57,16 @@ public class Line : MonoBehaviour
         }
     }
 
-    public void Scale(float scale, Vector2 pivot)
-    {
-        Vector3[] linePoints = new Vector3[lineRenderer.positionCount];
-        lineRenderer.GetPositions(linePoints);
-        for (int i = 0; i < linePoints.Length; i++)
-        {
-            linePoints[i].x = pivot.x + scale * (linePoints[i].x - pivot.x);
-            linePoints[i].y = pivot.y + scale * (linePoints[i].y - pivot.y);
-        }
-        lineRenderer.SetPositions(linePoints);
-    }
+    // Unused
+    // public void Scale(float scale, Vector2 pivot)
+    // {
+    //     Vector3[] linePoints = new Vector3[lineRenderer.positionCount];
+    //     lineRenderer.GetPositions(linePoints);
+    //     for (int i = 0; i < linePoints.Length; i++)
+    //     {
+    //         linePoints[i].x = pivot.x + scale * (linePoints[i].x - pivot.x);
+    //         linePoints[i].y = pivot.y + scale * (linePoints[i].y - pivot.y);
+    //     }
+    //     lineRenderer.SetPositions(linePoints);
+    // }
 }

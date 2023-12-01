@@ -10,10 +10,9 @@ public class DrawManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject sword;
     private Camera cam;
-    [SerializeField] private Line[] linePrefabs;
-    private int chosenLine = 0;
-    [SerializeField] private string frameMask;
-    [SerializeField] private string lineMask;
+    [SerializeField] private Line linePrefab;
+    [SerializeField] private LayerMask frameMask;
+    [SerializeField] private LayerMask lineMask;
     private Line currentLine;
     public ToolHover currentTool;
     private LineRenderer highlightLine;
@@ -24,12 +23,12 @@ public class DrawManager : MonoBehaviour
 
     private void Update() {
         Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, LayerMask.GetMask(frameMask));
-        if (chosenTool <= 2 && hit.collider)
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, frameMask);
+        if (chosenTool == 0 && hit.collider)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                currentLine = Instantiate(linePrefabs[chosenLine], mousePos, Quaternion.identity);
+                currentLine = Instantiate(linePrefab, mousePos, Quaternion.identity);
                 if (hit.collider.name == "Character_Frame")
                 {
                     currentLine.gameObject.transform.SetParent(player.transform);
@@ -49,8 +48,8 @@ public class DrawManager : MonoBehaviour
             }
         }
 
-        RaycastHit2D hit2 = Physics2D.CircleCast(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.5f, Vector2.zero, Mathf.Infinity, LayerMask.GetMask(lineMask));
-        if (chosenTool == 3 && hit2.collider)
+        RaycastHit2D hit2 = Physics2D.CircleCast(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.5f, Vector2.zero, Mathf.Infinity, lineMask);
+        if (chosenTool == 1 && hit2.collider)
         {
             if (highlightLine)
             {
@@ -88,21 +87,11 @@ public class DrawManager : MonoBehaviour
         }
     }
 
-    public void SwitchLine(int lineType)
-    {
-        chosenLine = lineType;
-    }
-
     public void SwitchTool(ToolHover toolSelected)
     {
         currentTool.SwitchDefault();
         currentTool = toolSelected;
         chosenTool = toolSelected.toolType;
         toolSelected.SwitchHover();
-
-        if (chosenTool <= 2)
-        {
-            chosenLine = chosenTool;
-        }
     }
 }
