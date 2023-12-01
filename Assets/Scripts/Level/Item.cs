@@ -30,6 +30,7 @@ public class Item : MonoBehaviour
             {
                 itemManager.GetTool();
             }
+            audioPlayer.instance.play_audio_pick();
             Destroy(gameObject);
         }
     }

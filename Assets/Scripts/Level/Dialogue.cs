@@ -12,6 +12,7 @@ public class Dialogue : MonoBehaviour
     private void Update() {
         if (isTriggered && Input.GetKeyDown(KeyCode.E))
         {
+            audioPlayer.instance.play_audio_pick();
             textPrinter[dialogueProgress].SetActive(true);
         }
     }

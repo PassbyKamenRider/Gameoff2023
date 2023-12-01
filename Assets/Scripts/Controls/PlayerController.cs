@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckX = 0.5f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask lineLayer;
+    [SerializeField] private bool isWalking = false;
 
     [Header("Player Attack")]
     [SerializeField] private Animator swordAnimator;
@@ -41,9 +42,25 @@ public class PlayerController : MonoBehaviour
     {
         GetInputs();
         Move();
+        PlayAudioWalk();
         Jump();
         Flip();
         Attack();
+    }
+
+    private void PlayAudioWalk() {
+        if (playerRb.velocity.x != 0 && IsGrounded()) {
+            if (!isWalking) {
+                isWalking = true;
+                audioPlayer.instance.play_audio_walk();
+            } 
+        } else {
+            if (isWalking) {
+                isWalking = false;
+                audioPlayer.instance.stop_audio_walk();
+            } 
+        }
+
     }
 
     private void GetInputs()
@@ -79,6 +96,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
+            audioPlayer.instance.play_audio_jump();
+            if (audioPlayer.instance.audio_walk.isPlaying) { 
+                audioPlayer.instance.stop_audio_walk();
+            }
         }
     }
 
@@ -105,6 +126,7 @@ public class PlayerController : MonoBehaviour
             swordAnimator.SetTrigger("Attack");
             attackBlocked = true;
             StartCoroutine(DelayAttack());
+             audioPlayer.instance.play_audio_sword();
         }
     }
 

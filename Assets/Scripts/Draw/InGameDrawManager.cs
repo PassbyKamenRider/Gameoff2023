@@ -27,7 +27,8 @@ public class InGameDrawManager : MonoBehaviour
         if (chosenTool == 0 && !EventSystem.current.IsPointerOverGameObject())
         {
             if (Input.GetMouseButtonDown(0))
-            {
+            {   
+                audioPlayer.instance.play_audio_draw();
                 currentLine = Instantiate(linePrefab, mousePos, Quaternion.identity);
             }
 
@@ -37,6 +38,14 @@ public class InGameDrawManager : MonoBehaviour
                 {
                     currentLine.SetPosition(mousePos);
                 }
+            } else {
+                if (audioPlayer.instance.audio_draw.isPlaying) {
+                    audioPlayer.instance.stop_audio_draw();
+                }
+            }
+        } else {
+            if (audioPlayer.instance.audio_draw.isPlaying) {
+                audioPlayer.instance.stop_audio_draw();
             }
         }
 
@@ -54,7 +63,9 @@ public class InGameDrawManager : MonoBehaviour
             lr.endColor = Color.red;
 
             if (Input.GetMouseButtonDown(0))
-            {
+            {   
+                audioPlayer.instance.play_audio_eraser();
+   
                 Destroy(highlightLine.transform.GetChild(0).gameObject);
                 Destroy(highlightLine.gameObject);
                 highlightLine = null;
@@ -74,6 +85,7 @@ public class InGameDrawManager : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                audioPlayer.instance.play_audio_zoom();
                 if (chosenTool == 4 && hit3.collider.transform.localScale.x > 0.25f)
                 {
                     hit3.collider.transform.localScale = hit3.collider.transform.localScale * 0.5f;
@@ -90,6 +102,7 @@ public class InGameDrawManager : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                audioPlayer.instance.play_audio_spin();
                 hit4.collider.transform.Rotate(new Vector3(0f, 0f, 90f));
             }
         }

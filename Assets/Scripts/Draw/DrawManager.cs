@@ -27,7 +27,9 @@ public class DrawManager : MonoBehaviour
         if (chosenTool == 0 && hit.collider)
         {
             if (Input.GetMouseButtonDown(0))
-            {
+            {   
+                audioPlayerHome.instance.play_audio_draw_home();
+
                 currentLine = Instantiate(linePrefab, mousePos, Quaternion.identity);
                 if (hit.collider.name == "Character_Frame")
                 {
@@ -37,7 +39,8 @@ public class DrawManager : MonoBehaviour
                 {
                     currentLine.gameObject.transform.SetParent(sword.transform);
                 }
-            }
+            } 
+        
 
             if (Input.GetMouseButton(0))
             {
@@ -45,6 +48,16 @@ public class DrawManager : MonoBehaviour
                 {
                     currentLine.SetPosition(mousePos);
                 }
+            } else {
+                if (audioPlayerHome.instance.audio_draw_home.isPlaying) {
+                    audioPlayerHome.instance.stop_audio_draw_home();
+                }
+
+            }
+            
+        } else {
+            if (audioPlayerHome.instance.audio_draw_home.isPlaying) {
+                audioPlayerHome.instance.stop_audio_draw_home();
             }
         }
 
@@ -62,11 +75,12 @@ public class DrawManager : MonoBehaviour
             lr.endColor = Color.red;
 
             if (Input.GetMouseButtonDown(0))
-            {
+            {   
+                audioPlayerHome.instance.play_audio_eraser_home();
                 Destroy(highlightLine.transform.GetChild(0).gameObject);
                 Destroy(highlightLine.gameObject);
                 highlightLine = null;
-            }
+            } 
         }
         else
         {
